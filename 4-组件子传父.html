@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>4-组件子传父</title>
+</head>
+
+<body>
+  <div id="app">
+    <child @myevent="handleClick($event)"></child>
+  </div>
+
+  <script>
+    Vue.component('child', {
+      template: `<div>
+        child子组件
+        <button @click="payMoney()">给你打钱</button>
+        </div>`,
+      methods: {
+        payMoney() {
+          this.$emit("myevent", "只有一百块")
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        handleClick(e) {
+          console.log("你爹收到钱了", e, "对你说了句：小气鬼")
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

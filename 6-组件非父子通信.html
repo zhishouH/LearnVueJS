@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>6-组件非父子通信</title>
+</head>
+
+<body>
+  <div id="app">
+    <wxauthor></wxauthor>
+    <hr>
+    <wxuser></wxuser>
+  </div>
+
+  <script>
+    var bus = new Vue()
+    Vue.component("wxauthor", {
+      template: `
+      <div>
+        <h2>微信发布者</h2>
+        <input type="text" ref="mytext">
+        <button @click="handlechlik">发布</button> 
+      </div>`,
+      methods: {
+        handlechlik() {
+          bus.$emit("wxmessage", this.$refs.mytext.value)
+        }
+      }
+    })
+    Vue.component("wxuser", {
+      template: `
+      <div>
+        <h2>微信用户</h2>
+        {{msg}}
+      </div>`,
+      data() {
+        return {
+          msg: ''
+        }
+      },
+      mounted() {
+        bus.$on("wxmessage", (data) => {
+          console.log("收到推送文章了", data)
+          this.msg = data
+        })
+        console.log("生命周期函数-当前dom创建之后就会被调用")
+      }
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+      }
+    })
+  </script>
+
+</body>
+
+</html>
