@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>10-单元素过渡</title>
+  <style>
+    .kerwinfade-enter-active,
+    .kerwinfade-leave-active {
+      transition: all 1.5s;
+    }
+
+    .kerwinfade-enter,
+    .kerwinfade-leave-to {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click='ishow=!ishow'>点击切换</button>
+    <transition name='kerwinfade'>
+      <p v-show="ishow">zhishouh-Lao_HuangZ19</p>
+    </transition>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        ishow: false
+      }
+    })
+  </script>
+</body>
+
+</html>
