@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>过滤器</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="data in datalist" :key="data.id">
+        <h4>{{data.nm}}</h4>
+        <!-- <img :src="changePath(data.img)" > -->
+        <img :src="data.img | filterPath">
+      </li>
+    </ul>
+
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        datalist: []
+      },
+      mounted() {
+        axios.get('./json/test.json').then(res => {
+          this.datalist = res.data.movieList
+          console.log(res.data.movieList)
+        })
+      },
+      methods: {
+        changePath(path) {
+          return path.replace('w.h', '200.400')
+        }
+      },
+      filters: {
+        filterPath(data) {
+          return data.replace('w.h', '200.400')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
