@@ -13,7 +13,9 @@
   <div id="box">
     <button @click="handleClick">点击获取信息</button>
     <ul>
-      <li v-for="data in datalist" :key="data.id">{{data}}</li>
+      <li v-for="data in datalist" :key="data.id">
+        <h3>{{data.nm}}</h3>
+      </li>
     </ul>
   </div>
   <script>
@@ -26,7 +28,8 @@
         handleClick() {
           fetch("./json/test.json").then(res => res.json())
             .then(res => {
-              this.datalist = res.test
+              console.log(res.movieList)
+              this.datalist = res.movieList
             })
         }
       }

@@ -15,7 +15,9 @@
   <div id="box">
     <button @click="handleClick">点击获取信息</button>
     <ul>
-      <li v-for="data in datalist" :key="data.id">{{data}}</li>
+      <li v-for="data in datalist" :key="data.id">
+        <h3>{{data.nm}}</h3>
+      </li>
     </ul>
   </div>
   <script>
@@ -26,9 +28,9 @@
       },
       methods: {
         handleClick() {
-          axios.get("./json/test.json").then(value => {
+          axios.get("./json/test.json").then(res => {
             // console.log(value.data.test)
-            this.datalist = value.data.test
+            this.datalist = res.data.movieList
           }).catch(reason => {
             console.log(err)
           })
