@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>组件子传父案例</title>
+</head>
+
+<body>
+  <div id="app">
+    <navbar @myevent='handleEvent()' :mytexts='mytext'></navbar>
+    <sidebar v-show='isShow'></sidebar>
+  </div>
+
+  <script>
+    Vue.component('navbar', {
+      template: `<div>
+          <button @click='handleClick()'>{{mytexts}}</button>
+        </div>`,
+      props: ['mytexts'],
+      methods: {
+        handleClick() {
+          this.$emit('myevent')
+        }
+      }
+    })
+    Vue.component('sidebar', {
+      template: `<div style="backgroundColor:teal;width:200px">
+          <ul>
+            <li>111</li>  
+            <li>222</li>  
+            <li>333</li>  
+            <li>444</li>  
+          </ul>
+        </div>`
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        isShow: false,
+        mytext: '显示',
+      },
+      methods: {
+        handleEvent() {
+          this.isShow = !this.isShow
+          if (this.isShow) {
+            this.mytext = '隐藏'
+          } else {
+            this.mytext = '显示'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -6,35 +6,40 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <title>4-组件子传父</title>
+  <title>组件子传父--事件向上传</title>
 </head>
 
 <body>
   <div id="app">
-    <child @myevent="handleClick($event)"></child>
+    父组件 {{getChildName}}
+    <child @myevent='handleEvent($event)'></child>
   </div>
 
   <script>
     Vue.component('child', {
       template: `<div>
-        child子组件
-        <button @click="payMoney()">给你打钱</button>
-        </div>`,
+                child组件--{{childName}}
+                <button @click='payMoney()'>点击</button>
+                </div>`,
+      data() {
+        return {
+          childName: '子组件的状态'
+        }
+      },
       methods: {
         payMoney() {
-          this.$emit("myevent", "只有一百块")
+          this.$emit('myevent', this.childName) // 触发事件
         }
       }
     })
-
     var app = new Vue({
       el: '#app',
       data: {
-
+        getChildName: ''
       },
       methods: {
-        handleClick(e) {
-          console.log("你爹收到钱了", e, "对你说了句：小气鬼")
+        handleEvent(ev) {
+          this.getChildName = "-- 接受到了" + ev
         }
       }
     })

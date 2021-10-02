@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件修饰符</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <!-- self
+  stop
+  once
+  prevent
+  enter -->
+  <div id="app">
+    <!-- 阻止冒泡 -->
+    <ul @click.self='handleUlClick'>
+      <li @click.stop='handleLiClick'>111</li>
+      <li @click='handleLiClick'>222</li>
+      <li @click.once='handleLiClick'>333</li>
+    </ul>
+    <hr>
+
+    <!-- 阻止默认行为 -->
+    <a href="http://www.baidu.com" @click.prevent='handleChangePage'>changePage</a>
+    <hr>
+
+    <input type="text" @keyup.enter='handleKeyUp'>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        handleUlClick() {
+          console.log('ul click')
+        },
+        handleLiClick() {
+          console.log('li click')
+        },
+        handleChangePage() {
+          console.log('change')
+        },
+        handleKeyUp() {
+          console.log('按下回车执行动作')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件修饰符</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <!-- self
+  stop
+  once
+  prevent
+  enter -->
+  <div id="app">
+    <!-- 阻止冒泡 -->
+    <ul @click.self='handleUlClick'>
+      <li @click.stop='handleLiClick'>111</li>
+      <li @click='handleLiClick'>222</li>
+      <li @click.once='handleLiClick'>333</li>
+    </ul>
+    <hr>
+
+    <!-- 阻止默认行为 -->
+    <a href="http://www.baidu.com" @click.prevent='handleChangePage'>changePage</a>
+    <hr>
+
+    <input type="text" @keyup.enter='handleKeyUp'>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        handleUlClick() {
+          console.log('ul click')
+        },
+        handleLiClick() {
+          console.log('li click')
+        },
+        handleChangePage() {
+          console.log('change')
+        },
+        handleKeyUp() {
+          console.log('按下回车执行动作')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
